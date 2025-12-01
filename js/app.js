@@ -15,12 +15,22 @@
 const CONFIG = {
     weatherApiKey: 'YOUR_OPENWEATHERMAP_API_KEY', // Replace with actual API key
     weatherApiUrl: 'https://api.openweathermap.org/data/2.5/weather',
-    defaultLocation: { lat: 40.7128, lng: -74.0060 }, // NYC fallback
+    defaultLocation: { lat: 1.381497, lng: 103.955574 }, // Pasir Ris, Singapore
     mapZoom: 12,
+    nextCleanup: {
+        name: 'Pasir Ris Beach Cleanup',
+        location: 'Pasir Ris, Singapore',
+        lat: 1.381497,
+        lng: 103.955574,
+        date: '2025-12-15',
+        time: '09:00 AM',
+        members: 24,
+        googleMapsUrl: 'https://www.google.com/maps/place/Pasir+Ris+Beach,+Singapore/@1.381497,103.955574,15z'
+    },
     beachEvents: [
-        { lat: 40.5731, lng: -74.4730, name: 'Staten Island Beach Cleanup', members: 12 },
-        { lat: 40.7282, lng: -73.7949, name: 'Queens Beach Initiative', members: 8 },
-        { lat: 40.7489, lng: -73.9680, name: 'Manhattan Waterfront Project', members: 15 },
+        { lat: 1.381497, lng: 103.955574, name: 'Pasir Ris Beach Cleanup', members: 24 },
+        { lat: 1.356521, lng: 103.940131, name: 'East Coast Park Cleanup', members: 18 },
+        { lat: 1.291289, lng: 103.832361, name: 'Sentosa Beach Initiative', members: 15 },
     ]
 };
 
@@ -40,7 +50,10 @@ const elements = {
     crewsList: document.getElementById('crewsList'),
     createCrewBtn: document.getElementById('createCrewBtn'),
     leaderboardContent: document.getElementById('leaderboardContent'),
-    tabButtons: document.querySelectorAll('.tab-btn')
+    tabButtons: document.querySelectorAll('.tab-btn'),
+    joinCleanupBtn: document.getElementById('joinCleanupBtn'),
+    directionsBtn: document.getElementById('directionsBtn'),
+    shareBtn: document.getElementById('shareBtn')
 };
 
 // ============================================
@@ -140,6 +153,11 @@ function initializeNavigation() {
     elements.loginBtn?.addEventListener('click', showLoginModal);
     elements.heroCtaBtn?.addEventListener('click', showCrewModal);
     elements.createCrewBtn?.addEventListener('click', showCrewModal);
+
+    // Next cleanup event buttons
+    elements.joinCleanupBtn?.addEventListener('click', joinNextCleanup);
+    elements.directionsBtn?.addEventListener('click', getDirections);
+    elements.shareBtn?.addEventListener('click', shareCleanupEvent);
 }
 
 // ============================================
@@ -477,6 +495,52 @@ function joinEvent(eventName) {
 
 function viewCrew(crewName) {
     showNotification(`Viewing crew: ${crewName}`);
+}
+
+// ============================================
+// NEXT CLEANUP EVENT HANDLERS
+// ============================================
+
+function joinNextCleanup() {
+    console.log('🌊 Joining next cleanup at:', CONFIG.nextCleanup.name);
+    const message = `🎉 You've joined the ${CONFIG.nextCleanup.name} on ${CONFIG.nextCleanup.date}!`;
+    showNotification(message);
+    
+    // Store in localStorage
+    localStorage.setItem('joinedCleanup', JSON.stringify({
+        event: CONFIG.nextCleanup.name,
+        date: CONFIG.nextCleanup.date,
+        joinedAt: new Date().toISOString()
+    }));
+}
+
+function getDirections() {
+    console.log('🧭 Opening directions to Pasir Ris...');
+    const mapsUrl = CONFIG.nextCleanup.googleMapsUrl;
+    window.open(mapsUrl, '_blank');
+    showNotification('Opening directions in Google Maps...');
+}
+
+function shareCleanupEvent() {
+    console.log('📤 Sharing cleanup event...');
+    const shareText = `🌊 Join ShoreSquad's next beach cleanup at ${CONFIG.nextCleanup.name} on ${CONFIG.nextCleanup.date} at ${CONFIG.nextCleanup.time}! Rally your crew and help us clean up the beach. 📍 Coordinates: ${CONFIG.nextCleanup.lat}°N, ${CONFIG.nextCleanup.lng}°E`;
+    
+    // Check if Web Share API is available
+    if (navigator.share) {
+        navigator.share({
+            title: 'ShoreSquad - Next Beach Cleanup',
+            text: shareText,
+            url: window.location.href
+        }).catch(err => console.log('Share cancelled or failed:', err));
+    } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(shareText).then(() => {
+            showNotification('✓ Event details copied to clipboard!');
+        }).catch(err => {
+            console.error('Copy failed:', err);
+            showNotification('Share text: ' + shareText);
+        });
+    }
 }
 
 // ============================================

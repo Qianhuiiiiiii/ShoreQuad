@@ -318,6 +318,78 @@ section {
     flex-wrap: wrap;
 }
 
+/* Next Cleanup Spot Card */
+.next-cleanup-card {
+    background: linear-gradient(135deg, var(--primary) 0%, #004aa3 100%);
+    color: white;
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.next-cleanup-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.cleanup-badge {
+    display: inline-block;
+    background-color: var(--coral);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 0.5px;
+}
+
+.next-cleanup-card h3 {
+    margin: var(--spacing-md) 0;
+    font-size: var(--font-size-2xl);
+    position: relative;
+    z-index: 1;
+}
+
+.cleanup-location {
+    margin: var(--spacing-sm) 0;
+    font-size: var(--font-size-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.cleanup-coords {
+    margin: var(--spacing-xs) 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* Google Maps Iframe Container */
+.google-maps-container {
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.google-maps-container iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
 /* ============================================
    WEATHER SECTION
    ============================================ */

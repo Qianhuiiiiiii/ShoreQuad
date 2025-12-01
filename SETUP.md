@@ -19,14 +19,14 @@ ShoreSquad is a web application designed to mobilize young people to clean beach
 
 ### Colour Palette
 
-| Colour | Hex | Purpose |
-|--------|-----|---------|
-| Ocean Blue | `#0066CC` | Primary actions, CTAs, headers |
-| Sea Green | `#00AA66` | Success states, eco-highlights |
-| Sand/Cream | `#F5E6D3` | Background, subtle accents |
-| Coral | `#FF6B4A` | Alerts, important notifications |
-| Dark Navy | `#1A2A3A` | Text, navigation, structure |
-| Gold | `#FFD700` | Achievements, badges, rankings |
+| Colour     | Hex       | Purpose                         |
+| ---------- | --------- | ------------------------------- |
+| Ocean Blue | `#0066CC` | Primary actions, CTAs, headers  |
+| Sea Green  | `#00AA66` | Success states, eco-highlights  |
+| Sand/Cream | `#F5E6D3` | Background, subtle accents      |
+| Coral      | `#FF6B4A` | Alerts, important notifications |
+| Dark Navy  | `#1A2A3A` | Text, navigation, structure     |
+| Gold       | `#FFD700` | Achievements, badges, rankings  |
 
 ### Design Philosophy
 
@@ -48,15 +48,17 @@ ShoreSquad is a web application designed to mobilize young people to clean beach
 ### Installation
 
 1. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 2. **Start the development server**
+
    ```bash
    npm start
    ```
-   
+
    The app will open automatically at `http://localhost:8080`
 
 ### Alternative: Open Directly
